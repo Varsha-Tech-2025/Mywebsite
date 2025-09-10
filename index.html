@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduLearn Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="banner">Online Mode</div>
+
+  <div class="login-section">
+    <select id="userType">
+      <option value="">Select User</option>
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+    </select>
+
+    <div id="studentLogin" class="hidden">
+      <input type="text" id="studentName" placeholder="Enter Initial Name" />
+      <button onclick="loginStudent()">Login</button>
+    </div>
+
+    <div id="teacherLogin" class="hidden">
+      <input type="text" id="teacherName" placeholder="Enter Name" />
+      <input type="password" id="teacherPassword" placeholder="Enter Password" />
+      <button onclick="loginTeacher()">Login</button>
+    </div>
+  </div>
+
+  <div id="mainInterface" class="hidden">
+    <h2 id="welcomeMsg"></h2>
+    <button onclick="showLessons()">Lessons</button>
+    <button onclick="showGrades()">Grade Selection</button>
+    <button onclick="uploadContent()">Upload Content</button>
+    <button onclick="showFeatures()">Features</button>
+    <button onclick="unlockScreen()">Screen Unlock</button>
+
+    <div id="contentArea"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
