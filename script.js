@@ -1,3 +1,5 @@
+let currentLang = "en";
+
 document.getElementById("userType").addEventListener("change", function () {
   const type = this.value;
   document.getElementById("studentLogin").classList.add("hidden");
@@ -38,11 +40,14 @@ function showMainInterface(name) {
   document.getElementById("welcomeMsg").innerText = `Welcome, ${name}`;
 }
 
+function logout() {
+  localStorage.clear();
+  location.reload();
+}
+
 function showLessons() {
-  const userType = localStorage.getItem("userType");
   const name = localStorage.getItem("userName");
   let lessons = JSON.parse(localStorage.getItem("lessons")) || {};
-
   if (!lessons[name]) {
     lessons[name] = { Math: 40, Science: 60, English: 80 };
     localStorage.setItem("lessons", JSON.stringify(lessons));
@@ -59,7 +64,6 @@ function showLessons() {
 function showGrades() {
   const name = localStorage.getItem("userName");
   let grades = JSON.parse(localStorage.getItem("grades")) || {};
-
   if (!grades[name]) {
     grades[name] = { Math: "B+", Science: "A", English: "A-" };
     localStorage.setItem("grades", JSON.stringify(grades));
@@ -73,14 +77,53 @@ function showGrades() {
   document.getElementById("contentArea").innerHTML = html;
 }
 
-function uploadContent() {
-  document.getElementById("contentArea").innerHTML = `<p>Upload feature coming soon...</p>`;
+function uploadAssignment() {
+  const name = localStorage.getItem("userName");
+  const file = prompt("Paste assignment text or summary:");
+  if (!file) return;
+
+  let assignments = JSON.parse(localStorage.getItem("assignments")) || {};
+  if (!assignments[name]) assignments[name] = [];
+  assignments[name].push(file);
+  localStorage.setItem("assignments", JSON.stringify(assignments));
+
+  alert("Assignment uploaded!");
+}
+
+function viewAssignments() {
+  const name = localStorage.getItem("userName");
+  let assignments = JSON.parse(localStorage.getItem("assignments")) || {};
+  let html = `<h3>Assignments</h3>`;
+  if (assignments[name]) {
+    assignments[name].forEach((a, i) => {
+      html += `<p><strong>Assignment ${i + 1}:</strong> ${a}</p>`;
+    });
+  } else {
+    html += `<p>No assignments uploaded.</p>`;
+  }
+  document.getElementById("contentArea").innerHTML = html;
 }
 
 function showFeatures() {
-  document.getElementById("contentArea").innerHTML = `<p>Interactive lessons, offline mode, grade tracking, and more!</p>`;
+  document.getElementById("contentArea").innerHTML = `
+    <ul>
+      <li>Interactive Lessons</li>
+      <li>Offline Mode</li>
+      <li>Assignment Upload</li>
+      <li>Grade Tracking</li>
+      <li>English ↔ Punjabi Translation</li>
+    </ul>`;
 }
 
-function unlockScreen() {
-  document.getElementById("contentArea").innerHTML = `<p>Screen unlocked. Welcome back!</p>`;
+function toggleLanguage() {
+  currentLang = currentLang === "en" ? "pa" : "en";
+  document.querySelectorAll("button").forEach(btn => {
+    btn.innerText = translate(btn.innerText);
+  });
 }
+
+function translate(text) {
+  const dictionary = {
+    "Lessons": "ਪਾਠ",
+    "Grade Selection": "ਗਰੇਡ ਚੋਣ",
+    "Upload Assignment":
