@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="banner">Online Mode</div>
+  <div class="banner">📶 Online Mode</div>
 
   <div class="login-section">
     <select id="userType">
@@ -18,23 +18,25 @@
 
     <div id="studentLogin" class="hidden">
       <input type="text" id="studentName" placeholder="Enter Initial Name" />
-      <button onclick="loginStudent()">Login</button>
+      <button class="btn" onclick="loginStudent()">Login</button>
     </div>
 
     <div id="teacherLogin" class="hidden">
       <input type="text" id="teacherName" placeholder="Enter Name" />
       <input type="password" id="teacherPassword" placeholder="Enter Password" />
-      <button onclick="loginTeacher()">Login</button>
+      <button class="btn" onclick="loginTeacher()">Login</button>
     </div>
   </div>
 
   <div id="mainInterface" class="hidden">
     <h2 id="welcomeMsg"></h2>
-    <button onclick="showLessons()">Lessons</button>
-    <button onclick="showGrades()">Grade Selection</button>
-    <button onclick="uploadContent()">Upload Content</button>
-    <button onclick="showFeatures()">Features</button>
-    <button onclick="unlockScreen()">Screen Unlock</button>
+    <button class="btn" onclick="showLessons()">📘 Lessons</button>
+    <button class="btn" onclick="showGrades()">🎓 Grade Selection</button>
+    <button class="btn" onclick="uploadAssignment()">📤 Upload Assignment</button>
+    <button class="btn" onclick="viewAssignments()">📁 View Assignments</button>
+    <button class="btn" onclick="showFeatures()">✨ Features</button>
+    <button class="btn" onclick="toggleLanguage()">🌐 Translate</button>
+    <button class="btn" onclick="logout()">🚪 Logout</button>
 
     <div id="contentArea"></div>
   </div>
